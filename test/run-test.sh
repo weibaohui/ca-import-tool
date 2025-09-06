@@ -5,10 +5,10 @@
 echo "=== CA证书导入工具测试流程 ==="
 echo
 
-# 检查Podman是否可用
-if ! command -v podman &> /dev/null
+# 检查Docker是否可用
+if ! command -v docker &> /dev/null
 then
-    echo "错误: 未找到Podman，请先安装Podman"
+    echo "错误: 未找到Docker，请先安装Docker"
     exit 1
 fi
 
@@ -24,16 +24,16 @@ echo
 echo "2. 构建测试环境Docker镜像..."
 # 回到项目根目录构建镜像
 cd ..
-podman build -t ca-test-server test/
+docker build -t ca-test-server test/
 cd test
 
 echo
 echo "3. 启动测试环境..."
 # 停止并删除已存在的容器
-podman stop ca-test >/dev/null 2>&1
-podman rm ca-test >/dev/null 2>&1
+docker stop ca-test >/dev/null 2>&1
+docker rm ca-test >/dev/null 2>&1
 # 启动新容器
-podman run -d -p 80:80 -p 443:443 --name ca-test ca-test-server >/dev/null
+docker run -d -p 80:80 -p 443:443 --name ca-test ca-test-server >/dev/null
 
 echo
 echo "4. 配置本地域名解析..."
@@ -77,4 +77,4 @@ echo "6. 观察浏览器显示受信任的连接"
 echo
 echo "管理命令："
 echo "停止测试环境: make test-docker-stop"
-echo "查看容器日志: podman logs ca-test"
+echo "查看容器日志: docker logs ca-test"
