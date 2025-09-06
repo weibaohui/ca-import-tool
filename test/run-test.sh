@@ -57,12 +57,21 @@ fi
 echo
 echo "=== 测试环境已准备就绪 ==="
 echo
+echo "测试证书支持的域名和IP地址:"
+echo "  - test.example.com"
+echo "  - localhost"
+echo "  - 127.0.0.1"
+echo "  - 192.168.1.8"
+echo
 echo "接下来的测试步骤："
-echo "1. 打开浏览器访问 https://test.example.com"
+echo "1. 打开浏览器访问以下任一地址:"
+echo "   - https://test.example.com"
+echo "   - https://localhost"
+echo "   - https://127.0.0.1"
 echo "2. 观察浏览器显示证书不受信任的警告"
 echo "3. 回到项目根目录: cd .."
 echo "4. 运行CA证书导入工具: ./ca-import-tool test/ssl/test.example.com.crt"
-echo "5. 重启浏览器并重新访问 https://test.example.com"
+echo "5. 重启浏览器并重新访问以上任一地址"
 echo "6. 观察浏览器显示受信任的连接"
 
 echo

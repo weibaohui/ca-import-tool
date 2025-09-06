@@ -5,14 +5,43 @@
 # 创建SSL证书目录
 mkdir -p ssl
 
+# 创建OpenSSL配置文件
+cat > ssl/openssl.cnf << EOF
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+distinguished_name = dn
+req_extensions = v3_req
+
+[dn]
+C = CN
+ST = Beijing
+L = Beijing
+O = Example Corp
+OU = IT Department
+CN = test.example.com
+
+[v3_req]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = test.example.com
+DNS.2 = localhost
+IP.1 = 127.0.0.1
+IP.2 = 192.168.1.8
+EOF
+
 # 生成私钥
 openssl genrsa -out ssl/test.example.com.key 2048
 
 # 生成证书签名请求(CSR)
-openssl req -new -key ssl/test.example.com.key -out ssl/test.example.com.csr -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Corp/OU=IT Department/CN=test.example.com"
+openssl req -new -key ssl/test.example.com.key -out ssl/test.example.com.csr -config ssl/openssl.cnf
 
 # 生成自签名证书
-openssl x509 -req -days 365 -in ssl/test.example.com.csr -signkey ssl/test.example.com.key -out ssl/test.example.com.crt
+openssl x509 -req -days 365 -in ssl/test.example.com.csr -signkey ssl/test.example.com.key -out ssl/test.example.com.crt -extensions v3_req -extfile ssl/openssl.cnf
 
 # 显示证书信息
 echo "证书已生成:"
