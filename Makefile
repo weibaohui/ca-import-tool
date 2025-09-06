@@ -37,6 +37,25 @@ test:
 build-local:
 	$(GO_BUILD) -o $(APP_NAME)
 
+# 生成测试证书
+test-cert:
+	cd test && ./generate-cert.sh
+
+# 构建测试环境Docker镜像
+test-docker-build:
+	podman build -t ca-test-server test/
+	@echo "Docker镜像构建完成。使用 'make test-docker-run' 运行测试环境"
+
+# 运行测试环境Docker容器
+test-docker-run:
+	podman run -d -p 80:80 -p 443:443 --name ca-test ca-test-server
+	@echo "测试环境已启动。访问 https://test.example.com 测试证书信任状态"
+
+# 停止测试环境Docker容器
+test-docker-stop:
+	podman stop ca-test && podman rm ca-test
+	@echo "测试环境已停止并删除"
+
 # 显示帮助信息
 help:
 	@echo "Usage: make [target]"
@@ -49,4 +68,8 @@ help:
 	@echo "  build-local      本地构建"
 	@echo "  clean            清理构建文件"
 	@echo "  test             运行测试"
+	@echo "  test-cert        生成测试证书"
+	@echo "  test-docker-build 构建测试环境Docker镜像"
+	@echo "  test-docker-run  运行测试环境Docker容器"
+	@echo "  test-docker-stop 停止测试环境Docker容器"
 	@echo "  help             显示此帮助信息"

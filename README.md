@@ -48,65 +48,14 @@ go build -o ca-import-tool
 ./ca-import-tool -v
 ```
 
-## 命令行参数
+## 测试环境
 
-```
-Usage:
-  ca-import-tool [flags] <certificate-file>
+项目提供了一个完整的测试环境，用于验证CA证书导入工具的功能：
 
-Flags:
-  -d, --docker-host string   指定Docker镜像仓库域名
-  -f, --force                强制覆盖已存在的证书
-  -h, --help                 显示帮助信息
-  -v, --version              显示版本信息
-```
+1. 使用自签名证书的测试服务器
+2. 对比证书导入前后的浏览器信任状态
 
-## 平台支持
-
-### Windows
-
-使用`certutil`命令将证书导入Windows系统信任库：
-```
-certutil -addstore -f "Root" your-ca.crt
-```
-
-### macOS
-
-使用`security`命令将证书导入macOS系统钥匙串：
-```
-sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain your-ca.crt
-```
-
-### Linux
-
-根据发行版不同使用相应命令：
-
-**Debian/Ubuntu:**
-```
-sudo cp your-ca.crt /usr/local/share/ca-certificates/
-sudo update-ca-certificates
-```
-
-**CentOS/RHEL:**
-```
-sudo cp your-ca.crt /etc/pki/ca-trust/source/anchors/
-sudo update-ca-trust
-```
-
-## Docker证书配置
-
-为Docker配置独立的证书信任目录：
-```
-sudo mkdir -p /etc/docker/certs.d/<registry-domain>/
-sudo cp your-ca.crt /etc/docker/certs.d/<registry-domain>/ca.crt
-```
-
-## 安全说明
-
-1. 所有系统级操作都需要管理员权限
-2. 工具启动时会检查权限并在需要时提示用户
-3. 证书验证模块确保只导入预定义的CA证书
-4. 限制用户不能指定任意证书文件导入
+详细说明请参考 [测试环境说明](test/README.md)。
 
 ## 许可证
 

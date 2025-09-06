@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CA证书测试站点</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .trusted {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .untrusted {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .instructions {
+            background-color: #e2e3e5;
+            border: 1px solid #d6d8db;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CA证书测试站点</h1>
+        
+        <div class="status untrusted">
+            <h2>⚠️ 证书未受信任</h2>
+            <p>当前浏览器显示此站点的证书不受信任。</p>
+            <p>请使用CA证书导入工具导入证书后刷新页面。</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>测试说明</h3>
+            <p>此站点使用自签名证书，用于测试CA证书导入工具的效果：</p>
+            <ol>
+                <li>初始访问时，浏览器会提示证书不受信任</li>
+                <li>使用CA证书导入工具导入证书：
+                    <code>./ca-import-tool test.example.com.crt</code>
+                </li>
+                <li>重启浏览器后重新访问此页面</li>
+                <li>页面应显示为受信任状态</li>
+            </ol>
+        </div>
+        
+        <div>
+            <h3>站点信息</h3>
+            <ul>
+                <li><strong>域名:</strong> test.example.com</li>
+                <li><strong>协议:</strong> HTTPS (端口 443)</li>
+                <li><strong>证书:</strong> 自签名证书</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
