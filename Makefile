@@ -9,8 +9,8 @@ GO_BUILD := go build
 GO_CLEAN := go clean
 GO_TEST := go test
 
-# 默认构建
-build: build-windows build-darwin build-linux
+# 默认构建 - 清理并构建所有平台和架构版本
+build: clean build-windows build-windows-arm64 build-darwin build-darwin-arm64 build-linux build-linux-arm64 build-linux-arm
 
 # 构建Windows版本 (AMD64)
 build-windows:
@@ -77,7 +77,7 @@ help:
 	@echo "Usage: make [target]"
 	@echo
 	@echo "Targets:"
-	@echo "  build                  构建所有平台版本"
+	@echo "  build                  清理并构建所有平台版本"
 	@echo "  build-windows          构建Windows版本 (AMD64)"
 	@echo "  build-windows-arm64    构建Windows版本 (ARM64)"
 	@echo "  build-darwin           构建macOS版本 (AMD64)"
