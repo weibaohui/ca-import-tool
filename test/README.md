@@ -35,18 +35,14 @@ cd test
 - 127.0.0.1
 - 192.168.1.8
 
-### 2. 使用Podman/Docker运行测试服务器（推荐）
+### 2. 使用Docker运行测试服务器（推荐）
 
 ```bash
 # 构建Docker镜像
-podman build -t ca-test-server test/
-# 或者如果使用Docker:
-# docker build -t ca-test-server test/
+docker build -t ca-test-server test/
 
 # 运行容器
-podman run -d -p 80:80 -p 443:443 --name ca-test ca-test-server
-# 或者如果使用Docker:
-# docker run -d -p 80:80 -p 443:443 --name ca-test ca-test-server
+docker run -d -p 80:80 -p 443:443 --name ca-test ca-test-server
 ```
 
 ### 3. 配置本地域名解析
@@ -85,25 +81,19 @@ cd ..
 ### 停止测试服务器
 
 ```bash
-podman stop ca-test
-# 或者如果使用Docker:
-# docker stop ca-test
+docker stop ca-test
 ```
 
 ### 删除测试容器
 
 ```bash
-podman rm ca-test
-# 或者如果使用Docker:
-# docker rm ca-test
+docker rm ca-test
 ```
 
 ### 删除测试镜像
 
 ```bash
-podman rmi ca-test-server
-# 或者如果使用Docker:
-# docker rmi ca-test-server
+docker rmi ca-test-server
 ```
 
 ## 注意事项
@@ -124,7 +114,7 @@ podman rmi ca-test-server
 
 ### 无法访问测试站点
 
-1. 检查测试服务器是否正在运行: `podman ps`
+1. 检查测试服务器是否正在运行: `docker ps`
 2. 检查端口是否被占用: `sudo lsof -i :80,443`
 3. 确认域名解析是否正确: `ping test.example.com`
 4. 检查防火墙设置是否阻止了端口访问
