@@ -11,6 +11,7 @@ test/
 ├── index.html          # 测试页面
 ├── generate-cert.sh    # 生成自签名证书的脚本
 ├── run-local.sh        # 本地运行测试服务器的脚本(不使用Docker)
+├── run-test.sh         # 自动化测试流程脚本
 ├── README.md           # 本说明文件
 └── ssl/                # 生成的证书文件存放目录
 ```
@@ -27,6 +28,12 @@ cd test
 这将生成以下文件：
 - `ssl/test.example.com.key` - 私钥
 - `ssl/test.example.com.crt` - 自签名证书
+
+证书包含了以下域名和IP地址：
+- test.example.com
+- localhost
+- 127.0.0.1
+- 192.168.1.8
 
 ### 2. 使用Podman/Docker运行测试服务器（推荐）
 
@@ -50,8 +57,12 @@ echo "127.0.0.1 test.example.com" | sudo tee -a /etc/hosts
 
 ### 4. 测试证书导入前的状态
 
-1. 打开浏览器访问: https://test.example.com
-2. 浏览器应显示证书不受信任的警告
+可以使用以下任一地址访问测试站点:
+- https://test.example.com
+- https://localhost
+- https://127.0.0.1
+
+浏览器应显示证书不受信任的警告。
 
 ### 5. 使用CA证书导入工具
 
@@ -66,7 +77,7 @@ cd ..
 ### 6. 测试证书导入后的状态
 
 1. 重启浏览器
-2. 再次访问: https://test.example.com
+2. 再次访问以上任一地址
 3. 浏览器应显示受信任的连接，无安全警告
 
 ## 管理测试环境
