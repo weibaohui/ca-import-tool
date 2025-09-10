@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	
-	"ca-import-tool/crypto"
-	"ca-import-tool/docker"
-	"ca-import-tool/platform"
+
+	"github.com/weibaohui/ca-import-tool/crypto"
+	"github.com/weibaohui/ca-import-tool/docker"
+	"github.com/weibaohui/ca-import-tool/platform"
 )
 
 var (
@@ -32,7 +32,7 @@ func init() {
 	rootCmd.Flags().StringVarP(&dockerHost, "docker-host", "d", "", "指定Docker镜像仓库域名")
 	rootCmd.Flags().BoolVarP(&force, "force", "f", false, "强制覆盖已存在的证书")
 	rootCmd.Flags().BoolP("version", "v", false, "显示版本信息")
-	
+
 	// 版本信息处理
 	rootCmd.Flags().BoolP("help", "h", false, "显示帮助信息")
 }

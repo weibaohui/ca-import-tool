@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"ca-import-tool/cmd"
+	"github.com/weibaohui/ca-import-tool/cmd"
 )
 
 func main() {

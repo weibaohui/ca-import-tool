@@ -13,7 +13,7 @@
 ## 安装
 
 ```bash
-go get ca-import-tool/pkg/caimport
+go get github.com/weibaohui/ca-import-tool/pkg/caimport
 ```
 
 ## 使用方法
@@ -27,7 +27,7 @@ import (
     "fmt"
     "log"
     
-    "ca-import-tool/pkg/caimport"
+    "github.com/weibaohui/ca-import-tool/pkg/caimport"
 )
 
 func main() {
@@ -66,7 +66,7 @@ import (
     "fmt"
     "log"
     
-    "ca-import-tool/pkg/caimport"
+    "github.com/weibaohui/ca-import-tool/pkg/caimport"
 )
 
 func main() {

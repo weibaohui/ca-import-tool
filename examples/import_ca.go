@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"ca-import-tool/pkg/caimport"
+	"github.com/weibaohui/ca-import-tool/pkg/caimport"
 )
 
 func main() {

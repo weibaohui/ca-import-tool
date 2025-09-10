@@ -1,4 +1,4 @@
-module ca-import-tool
+module github.com/weibaohui/ca-import-tool
 
 go 1.19
 

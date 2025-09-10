@@ -57,7 +57,7 @@ go build -o ca-import-tool
 ### 安装
 
 ```bash
-go get ca-import-tool/pkg/caimport
+go get github.com/weibaohui/ca-import-tool/pkg/caimport
 ```
 
 ### 使用示例
@@ -69,7 +69,7 @@ import (
     "fmt"
     "log"
     
-    "ca-import-tool/pkg/caimport"
+    "github.com/weibaohui/ca-import-tool/pkg/caimport"
 )
 
 func main() {
