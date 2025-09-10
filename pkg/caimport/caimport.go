@@ -3,20 +3,20 @@ package caimport
 
 import (
 	"fmt"
-	
-	"ca-import-tool/crypto"
-	"ca-import-tool/docker"
-	"ca-import-tool/platform"
+
+	"github.com/weibaohui/ca-import-tool/crypto"
+	"github.com/weibaohui/ca-import-tool/docker"
+	"github.com/weibaohui/ca-import-tool/platform"
 )
 
 // ImportOptions 导入选项
 type ImportOptions struct {
 	// CertPath 证书文件路径
 	CertPath string
-	
+
 	// DockerHost Docker镜像仓库域名
 	DockerHost string
-	
+
 	// Force 是否强制覆盖已存在的证书
 	Force bool
 }
