@@ -11,9 +11,11 @@
 - 提供权限检查和错误处理机制
 - 安全性保障：只允许导入预定义的CA证书
 
-## 安装
+## 作为命令行工具使用
 
-### 从源码编译
+### 安装
+
+#### 从源码编译
 
 ```bash
 # 克隆项目
@@ -29,7 +31,7 @@ go build -o ca-import-tool
 # Linux: GOOS=linux GOARCH=amd64 go build -o ca-import-tool-linux
 ```
 
-## 使用方法
+### 使用方法
 
 ```bash
 # 基本用法：导入证书到系统信任库
@@ -48,6 +50,57 @@ go build -o ca-import-tool
 ./ca-import-tool -v
 ```
 
+## 作为Go包使用
+
+除了作为命令行工具使用外，该工具的核心功能也可以作为Go包导入到其他项目中。
+
+### 安装
+
+```bash
+go get ca-import-tool/pkg/caimport
+```
+
+### 使用示例
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+    
+    "ca-import-tool/pkg/caimport"
+)
+
+func main() {
+    // 验证证书
+    valid, err := caimport.VerifyCertificate("/path/to/certificate.crt")
+    if err != nil {
+        log.Fatalf("证书验证失败: %v", err)
+    }
+    
+    if !valid {
+        log.Fatal("证书验证未通过")
+    }
+    
+    // 导入证书
+    options := caimport.ImportOptions{
+        CertPath:   "/path/to/certificate.crt",
+        DockerHost: "",
+        Force:      false,
+    }
+    
+    err = caimport.ImportCA(options)
+    if err != nil {
+        log.Fatalf("证书导入失败: %v", err)
+    }
+    
+    fmt.Println("证书导入成功")
+}
+```
+
+更多使用方法请参考 [包使用说明](pkg/caimport/README.md)。
+
 ## 测试环境
 
 项目提供了一个完整的测试环境，用于验证CA证书导入工具的功能：
@@ -60,3 +113,7 @@ go build -o ca-import-tool
 ## 许可证
 
 [MIT License](LICENSE)
+
+## 示例
+
+查看 [examples](examples/) 目录了解更多使用示例。
